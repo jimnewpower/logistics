@@ -10,6 +10,8 @@
     - !user admin
     - !user developer
     - !user auditor
+    - !user alice
+    - !user deborah
 
   # Define application groups
   - &groups
@@ -22,8 +24,14 @@
     role: !group admins
     member: !user admin
   - !grant
+    role: !group admins
+    member: !user alice
+  - !grant
     role: !group developers
     member: !user developer
+  - !grant
+    role: !group developers
+    member: !user deborah
   - !grant
     role: !group auditors
     member: !user auditor
