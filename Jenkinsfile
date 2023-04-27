@@ -2,12 +2,12 @@ timestamps {
     node () {
         stage ('Checkout') {
             withCredentials([
-                conjurSecretCredential(credentialsId: 'GITHUB_USERNAME', variable: 'GH_LOGIN'),
-                conjurSecretCredential(credentialsId: 'GITHUB_PASSWORD', variable: 'GH_PASS')
+                conjurSecretCredential(credentialsId: 'DB_USERNAME', variable: 'DB_LOGIN'),
+                conjurSecretCredential(credentialsId: 'DB_PASSWORD', variable: 'DB_PASS')
             ]) {
                 sh '''
-                    echo "GitHub login: $GH_LOGIN"
-                    echo "GitHub pass: $GH_PASS"
+                    echo "Postgres username: $DB_LOGIN"
+                    echo "Postgres password: $DB_PASS"
                 '''
             }
         }
