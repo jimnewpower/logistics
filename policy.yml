@@ -1,0 +1,99 @@
+# db_application_policy.yml
+
+# Define the policy for the database application
+- !policy
+  id: database_application
+
+  # Define application users
+  body:
+  - &users
+    - !user admin
+    - !user developer
+    - !user auditor
+
+  # Define application groups
+  - &groups
+    - !group admins
+    - !group developers
+    - !group auditors
+
+  # Assign users to groups
+  - !grant
+    role: !group admins
+    member: !user admin
+  - !grant
+    role: !group developers
+    member: !user developer
+  - !grant
+    role: !group auditors
+    member: !user auditor
+
+  # Define the secrets for the database connection
+  - &secrets
+    - !variable db_username
+    - !variable db_password
+    - !variable db_host
+    - !variable db_port
+
+  # Set permissions for each group on the secrets
+  - !permit
+    resource: !variable db_username
+    role: !group admins
+    privileges: [read, update, create, delete]
+
+  - !permit
+    resource: !variable db_password
+    role: !group admins
+    privileges: [read, update, create, delete]
+
+  - !permit
+    resource: !variable db_host
+    role: !group admins
+    privileges: [read, update, create, delete]
+
+  - !permit
+    resource: !variable db_port
+    role: !group admins
+    privileges: [read, update, create, delete]
+
+  # Developers should only be able to read the secrets
+  - !permit
+    resource: !variable db_username
+    role: !group developers
+    privileges: [read]
+
+  - !permit
+    resource: !variable db_password
+    role: !group developers
+    privileges: [read]
+
+  - !permit
+    resource: !variable db_host
+    role: !group developers
+    privileges: [read]
+
+  - !permit
+    resource: !variable db_port
+    role: !group developers
+    privileges: [read]
+
+  # Auditors should only be able to read the secrets
+  - !permit
+    resource: !variable db_username
+    role: !group auditors
+    privileges: [read]
+
+  - !permit
+    resource: !variable db_password
+    role: !group auditors
+    privileges: [read]
+
+  - !permit
+    resource: !variable db_host
+    role: !group auditors
+    privileges: [read]
+
+  - !permit
+    resource: !variable db_port
+    role: !group auditors
+    privileges: [read]
