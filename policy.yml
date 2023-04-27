@@ -12,6 +12,7 @@
     - !user auditor
     - !user alice
     - !user deborah
+    - !user workbot
 
   # Define application groups
   - &groups
@@ -32,6 +33,9 @@
   - !grant
     role: !group developers
     member: !user deborah
+  - !grant
+    role: !group developers
+    member: !user workbot
   - !grant
     role: !group auditors
     member: !user auditor
