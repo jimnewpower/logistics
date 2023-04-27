@@ -1,0 +1,34 @@
+# delete_db_application_policy.yml
+
+- !delete
+  record: !policy database_application
+
+- !delete
+  record: !user admin
+
+- !delete
+  record: !user developer
+
+- !delete
+  record: !user auditor
+
+- !delete
+  record: !group admins
+
+- !delete
+  record: !group developers
+
+- !delete
+  record: !group auditors
+
+- !delete
+  record: !variable db_username
+
+- !delete
+  record: !variable db_password
+
+- !delete
+  record: !variable db_host
+
+- !delete
+  record: !variable db_port
